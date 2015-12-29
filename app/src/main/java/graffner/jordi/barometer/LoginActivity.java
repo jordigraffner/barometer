@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import javax.security.auth.login.LoginException;
+
 import graffner.jordi.barometer.database.DatabaseHelper;
 import graffner.jordi.barometer.database.DatabaseInfo;
 
@@ -27,8 +29,16 @@ public class LoginActivity extends AppCompatActivity {
         rs.moveToFirst();
         String name = (String) rs.getString(rs.getColumnIndex("name"));
         Log.d("Dit is output ", "dit " + name);
+
         Cursor res = dbHelper.query(DatabaseInfo.BarometerTables.COURSE, new String[]{"*"}, null, null, null, null, null);
         res.moveToFirst();   // kan leeg zijn en faalt dan
         DatabaseUtils.dumpCursor(rs);
+
+        final Button btnInvoer = (Button) findViewById(R.id.btnInvoer);
+        btnInvoer.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, InvoerActivity.class));
+            }
+        });
     }
 }
