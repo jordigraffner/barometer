@@ -34,11 +34,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                         DatabaseInfo.UserColumn.NAME + " TEXT);"
         );
+        db.execSQL("CREATE TABLE " + DatabaseInfo.BarometerTables.COURSE + " (" +
+                        BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        DatabaseInfo.CourseColumn.NAME + " TEXT," +
+                        DatabaseInfo.CourseColumn.ECTS + " TEXT," +
+                        DatabaseInfo.CourseColumn.CODE + " TEXT," +
+                        DatabaseInfo.CourseColumn.GRADE + " TEXT);"
+        );
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS "+ DatabaseInfo.BarometerTables.USER);
+        db.execSQL("DROP TABLE IF EXISTS "+ DatabaseInfo.BarometerTables.COURSE);
         onCreate(db);
     }
 
