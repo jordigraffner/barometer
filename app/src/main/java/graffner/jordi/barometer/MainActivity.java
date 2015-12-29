@@ -38,17 +38,22 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         dbHelper = DatabaseHelper.getHelper(this);
-        final Button btnLogin = (Button) findViewById(R.id.btnLogin);
-        final EditText txtName   = (EditText)findViewById(R.id.txtName);
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                ContentValues values = new ContentValues();
-                values.put(DatabaseInfo.UserColumn.NAME, txtName.getText().toString());
-                dbHelper.insert(DatabaseInfo.BarometerTables.USER, null, values);
-                requestSubjects();
-                startActivity(new Intent(MainActivity.this, LoginActivity.class));
-            }
-        });
+        Cursor rs = dbHelper.query(DatabaseInfo.BarometerTables.USER, new String[]{"*"}, null, null, null, null, null);
+        if (rs.getCount() > 0) {
+            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+        } else {
+            final Button btnLogin = (Button) findViewById(R.id.btnLogin);
+            final EditText txtName = (EditText) findViewById(R.id.txtName);
+            btnLogin.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    ContentValues values = new ContentValues();
+                    values.put(DatabaseInfo.UserColumn.NAME, txtName.getText().toString());
+                    dbHelper.insert(DatabaseInfo.BarometerTables.USER, null, values);
+                    requestSubjects();
+                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                }
+            });
+        }
     }
 
     @Override
