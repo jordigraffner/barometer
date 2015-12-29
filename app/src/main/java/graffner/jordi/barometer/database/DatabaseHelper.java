@@ -42,17 +42,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    @Override
     public DatabaseHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version ){
         super(context,name,factory, version);
     }
 
-    @Override
     public void insert(String table, String nullColumnHack, ContentValues values){
         mSQLDB.insert(table, nullColumnHack, values);
     }
 
-    @Override
     public Cursor query(String table, String[] columns, String selection, String[] selectArgs, String groupBy, String having, String orderBy){
         return mSQLDB.query(table, columns, selection, selectArgs, groupBy, having, orderBy);
     }
