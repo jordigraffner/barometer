@@ -3,6 +3,7 @@ package graffner.jordi.barometer;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,6 +27,8 @@ public class LoginActivity extends AppCompatActivity {
         rs.moveToFirst();
         String name = (String) rs.getString(rs.getColumnIndex("name"));
         Log.d("Dit is output ", "dit " + name);
-
+        Cursor res = dbHelper.query(DatabaseInfo.BarometerTables.COURSE, new String[]{"*"}, null, null, null, null, null);
+        res.moveToFirst();   // kan leeg zijn en faalt dan
+        DatabaseUtils.dumpCursor(rs);
     }
 }

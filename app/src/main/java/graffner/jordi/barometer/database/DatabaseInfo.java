@@ -16,7 +16,7 @@ public class DatabaseInfo {
     public class CourseColumn {
         public static final String NAME ="name";
         public static final String ECTS ="ects";
-        public static final String CODE ="code";
+        public static final String PERIOD ="period";
         public static final String GRADE ="grade";
     }
 }

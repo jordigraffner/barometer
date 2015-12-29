@@ -14,7 +14,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static SQLiteDatabase mSQLDB;
     private static DatabaseHelper mInstance;
     public static final String dbName = "barometer.db";
-    public static final int dbVersion = 2;
+    public static final int dbVersion = 3;
 
     public DatabaseHelper(Context ctx) {
         super(ctx, dbName, null, dbVersion);					// gebruik de super constructor.
@@ -38,7 +38,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                         DatabaseInfo.CourseColumn.NAME + " TEXT," +
                         DatabaseInfo.CourseColumn.ECTS + " TEXT," +
-                        DatabaseInfo.CourseColumn.CODE + " TEXT," +
+                        DatabaseInfo.CourseColumn.PERIOD + " TEXT," +
                         DatabaseInfo.CourseColumn.GRADE + " TEXT);"
         );
     }
