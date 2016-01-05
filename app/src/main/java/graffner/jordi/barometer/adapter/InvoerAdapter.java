@@ -30,26 +30,18 @@ public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater li = LayoutInflater.from(getContext());
         convertView = li.inflate(R.layout.view_content_row, parent, false);
         vh.name = (TextView) convertView.findViewById(R.id.subject_name);
-        vh.ects = (TextView) convertView.findViewById(R.id.subject_ects);
-                vh.grade = (TextView) convertView.findViewById(R.id.subject_grade);
-                vh.period = (TextView) convertView.findViewById(R.id.subject_period);
         convertView.setTag(vh);
         } else {
         vh = (ViewHolder) convertView.getTag();
         }
         CourseModel cm = getItem(position);
         vh.name.setText("Naam : "+ cm.name);
-        vh.ects.setText("ECTS : " +cm.ects);
-        vh.grade.setText("Cijfer : " +  cm.grade);
-        vh.period.setText("Periode : " + cm.period);
         return convertView;
         }
 
 private static class ViewHolder {
     TextView name;
-    TextView ects;
-        TextView grade;
-        TextView period;
+
 
 }
 }

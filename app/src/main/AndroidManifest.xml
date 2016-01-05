@@ -26,6 +26,10 @@
         </activity>
         <activity android:name=".OverzichtActivity" >
         </activity>
+        <activity android:name=".VakDetailActivitie" >
+        </activity>
+        <activity android:name=".DetailVakActivity" >
+        </activity>
     </application>
 
 </manifest>

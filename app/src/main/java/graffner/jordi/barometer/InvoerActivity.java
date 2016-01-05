@@ -43,7 +43,6 @@ public class InvoerActivity extends AppCompatActivity {
         while(res.moveToNext()){
             courseModels.add(new CourseModel(res.getString(res.getColumnIndex("name")),res.getString(res.getColumnIndex("ects")), res.getString(res.getColumnIndex("grade")), res.getString(res.getColumnIndex("period"))));
         }
-        courseModels.add(new CourseModel("IKPMD", "3", "10", "2"));             // DUMMY DATA
         mAdapter = new InvoerAdapter(InvoerActivity.this, 0, courseModels);
         mListView.setAdapter(mAdapter);
     }
