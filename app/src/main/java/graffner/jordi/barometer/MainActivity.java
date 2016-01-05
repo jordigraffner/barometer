@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
         for (CourseModel cm : subjects) {
             ContentValues cv = new ContentValues();
             cv.put(DatabaseInfo.CourseColumn.NAME, cm.name);
-            cv.put(DatabaseInfo.CourseColumn.GRADE, cm.grade);
+            cv.put(DatabaseInfo.CourseColumn.GRADE, 0);
             cv.put(DatabaseInfo.CourseColumn.ECTS, cm.ects);
             cv.put(DatabaseInfo.CourseColumn.PERIOD , cm.period);
             dbHelper.insert(DatabaseInfo.BarometerTables.COURSE, null, cv);

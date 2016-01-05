@@ -1,5 +1,6 @@
 package graffner.jordi.barometer;
 
+import android.database.Cursor;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
@@ -15,17 +17,31 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 
+import graffner.jordi.barometer.Model.CourseModel;
+import graffner.jordi.barometer.database.DatabaseHelper;
+import graffner.jordi.barometer.database.DatabaseInfo;
+
 public class OverzichtActivity extends AppCompatActivity {
     private PieChart mChart;
     public static final int MAX_ECTS = 60;
     public static int currentEcts = 0;
     public static int unknowntEcts = 60;
     public static int failedEcts = 0;
+    private DatabaseHelper dbHelper;
+    private List<CourseModel> courseModels = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_overzicht);
+
+        dbHelper = DatabaseHelper.getHelper(this);
+        Cursor res = dbHelper.query(DatabaseInfo.BarometerTables.COURSE, new String[]{"*"}, null, null, null, null, null);
+        //Laad courses in list
+        res.moveToFirst();
+        while(res.moveToNext()){
+            courseModels.add(new CourseModel(res.getString(res.getColumnIndex("name")),res.getString(res.getColumnIndex("ects")), res.getString(res.getColumnIndex("grade")), res.getString(res.getColumnIndex("period"))));
+        }
 
         mChart = (PieChart) findViewById(R.id.chart);
         mChart.setDescription("");
@@ -49,11 +65,11 @@ public class OverzichtActivity extends AppCompatActivity {
         ArrayList<Entry> yValues = new ArrayList<>();
         ArrayList<String> xValues = new ArrayList<>();
 
-        for(Double getal: lijst){
-            if(getal > 5.4){
+        for(CourseModel course: courseModels){
+            if(Double.parseDouble(course.grade) > 5.4) {
                 currentEcts += 3;
                 unknowntEcts -= 3;
-            } else {
+            } else if(Double.parseDouble(course.grade) < 5.5 && Double.parseDouble(course.grade) != 0) {
                 failedEcts += 3;
                 unknowntEcts -= 3;
             }
