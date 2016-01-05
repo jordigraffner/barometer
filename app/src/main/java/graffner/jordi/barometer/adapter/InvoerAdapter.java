@@ -35,7 +35,7 @@ public View getView(int position, View convertView, ViewGroup parent) {
         vh = (ViewHolder) convertView.getTag();
         }
         CourseModel cm = getItem(position);
-        vh.name.setText("Naam : "+ cm.name);
+        vh.name.setText(cm.name);
         return convertView;
         }
 
