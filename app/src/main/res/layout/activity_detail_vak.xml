@@ -27,7 +27,8 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:layout_gravity="center_vertical" />
 
-    <TextView
+
+    <EditText
         android:id="@+id/subject_grade"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -35,7 +36,11 @@
         android:paddingRight="16dp"
         android:paddingTop="20dp"
         android:text=" EN DEZE TEXT OOK "
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:layout_gravity="center_vertical"
+        android:singleLine="false"
+        android:enabled="false"
+        android:autoText="false" />
 
     <TextView
         android:id="@+id/subject_period"
@@ -46,7 +51,6 @@
         android:paddingTop="20dp"
         android:text=" EN DEZE TEXT OOK "
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
-
 
 
 </LinearLayout>
