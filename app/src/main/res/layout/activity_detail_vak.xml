@@ -5,6 +5,14 @@
     android:layout_height="match_parent"
     android:background="?android:attr/selectableItemBackground" >
 
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="edit"
+        android:id="@+id/btnEdit"
+        android:layout_gravity="right" />
+
     <TextView
         android:id="@+id/subject_name"
         android:layout_width="wrap_content"
@@ -38,9 +46,8 @@
         android:text=" EN DEZE TEXT OOK "
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:layout_gravity="center_vertical"
-        android:singleLine="false"
-        android:enabled="false"
-        android:autoText="false" />
+        android:focusable="false"
+        />
 
     <TextView
         android:id="@+id/subject_period"

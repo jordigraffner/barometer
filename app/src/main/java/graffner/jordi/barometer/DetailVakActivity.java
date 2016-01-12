@@ -5,6 +5,9 @@ import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 
@@ -15,6 +18,7 @@ import graffner.jordi.barometer.database.DatabaseInfo;
 public class DetailVakActivity extends AppCompatActivity {
     private DatabaseHelper dbHelper;
     private CourseModel course;
+    private int counter = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,12 +44,32 @@ public class DetailVakActivity extends AppCompatActivity {
         TextView cijfer = (TextView)findViewById(R.id.subject_grade);
         cijfer.setText("Cijfer: "+course.grade);
         TextView periode = (TextView)findViewById(R.id.subject_period);
-        periode.setText("Periode: "+course.period);
+        periode.setText("Periode: " + course.period);
         TextView ects = (TextView)findViewById(R.id.subject_ects);
-        ects.setText("ECTS: "+course.ects);
+        ects.setText("ECTS: " + course.ects);
+
+        final Button btnEdit = (Button) findViewById(R.id.btnEdit);
+        btnEdit.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if(counter == 0){
+                    counter +=1;
+                    btnEdit.setText("Save");
+                }
+                else if(counter == 1){
+                    counter += 1;
+                
+                }
+                EditText mEdit = (EditText) findViewById(R.id.subject_grade);
+                mEdit.setFocusableInTouchMode(true);
+
+            }
+        });
 
 
 
-        Log.d("naam" ,modelName);
+
+
+
+        Log.d("naam", modelName);
     }
 }

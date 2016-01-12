@@ -1,6 +1,5 @@
 package graffner.jordi.barometer;
 
-import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
@@ -9,9 +8,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-
-import javax.security.auth.login.LoginException;
 
 import graffner.jordi.barometer.database.DatabaseHelper;
 import graffner.jordi.barometer.database.DatabaseInfo;
