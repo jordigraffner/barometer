@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
                     dbHelper.insert(DatabaseInfo.BarometerTables.USER, null, values);
                     requestSubjects();
                     startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                    finish();
                 }
             });
         }
@@ -120,3 +121,4 @@ public class MainActivity extends AppCompatActivity {
 
 
 }
+
