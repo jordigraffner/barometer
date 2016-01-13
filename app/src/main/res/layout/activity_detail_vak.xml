@@ -3,7 +3,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?android:attr/selectableItemBackground" >
+    android:background="?android:attr/selectableItemBackground"
+    android:weightSum="1">
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -34,7 +35,21 @@
         android:text=" EN DEZE TEXT OOK "
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:layout_gravity="center_vertical" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
 
+    <TextView
+        android:id="@+id/subject_cijfers"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="20dp"
+        android:text=" EN DEZE TEXT OOK "
+        android:orientation="horizontal"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     <EditText
         android:id="@+id/subject_grade"
@@ -45,10 +60,12 @@
         android:paddingTop="20dp"
         android:text=" EN DEZE TEXT OOK "
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:layout_gravity="center_vertical"
+        android:layout_alignParentRight="true"
+        android:inputType="numberDecimal"
+        android:maxLength="3"
         android:focusable="false"
         />
-
+        </LinearLayout>
     <TextView
         android:id="@+id/subject_period"
         android:layout_width="wrap_content"
