@@ -1,5 +1,10 @@
 package graffner.jordi.barometer;
 
+import android.app.AlertDialog;
+import android.content.ContentValues;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +12,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +22,8 @@ import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
 import graffner.jordi.barometer.Model.CourseModel;
 import graffner.jordi.barometer.database.DatabaseHelper;
@@ -47,12 +55,44 @@ public class OverzichtActivity extends AppCompatActivity {
         }
 
         mChart = (PieChart) findViewById(R.id.chart);
-        mChart.setDescription("");
-        mChart.setTouchEnabled(false);
+        mChart.setDescription("Studievoortgang");
+        mChart.setTouchEnabled(true);
         mChart.setDrawSliceText(true);
         mChart.getLegend().setEnabled(false);
         mChart.setTransparentCircleColor(Color.rgb(130, 130, 130));
         mChart.animateY(1400, Easing.EasingOption.EaseInOutQuad);
+
+        mChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+
+            @Override
+            public void onValueSelected(Entry e, int dataSetIndex, Highlight h) {
+                // COUNT CHART VALUE SELECTED
+                AlertDialog.Builder builder = new AlertDialog.Builder(OverzichtActivity.this);
+                builder.setMessage("Look at this dialog!")
+                        .setCancelable(false)
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                //do things
+                            }
+                        });
+                AlertDialog alert = builder.create();
+                alert.show();
+            }
+
+            @Override
+            public void onNothingSelected() {
+                AlertDialog.Builder builder = new AlertDialog.Builder(OverzichtActivity.this);
+                builder.setMessage("Look at this dialog!")
+                        .setCancelable(false)
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                //do things
+                            }
+                        });
+                AlertDialog alert = builder.create();
+                alert.show();
+            }
+        });
 
         setData(0);
     }
@@ -110,7 +150,7 @@ public class OverzichtActivity extends AppCompatActivity {
 
         colors.add(Color.rgb(0,255,0));
 
-        colors.add(Color.rgb(255,0,0));
+        colors.add(Color.rgb(255, 0, 0));
 
 
         PieDataSet dataSet = new PieDataSet(yValues, "ECTS");
@@ -118,9 +158,32 @@ public class OverzichtActivity extends AppCompatActivity {
         dataSet.setColors(colors);
 
         PieData data = new PieData(xValues, dataSet);
+
         mChart.setData(data);        // bind je dataset aan de chart.
         mChart.invalidate();        // Aanroepen van een volledige redraw
         Log.d("aantal =", "" + currentEcts);
+        if(failedEcts > 9){
+            showBsaAlert();
+        }
+    }
 
+    public void showBsaAlert(){
+        String message;
+        if(failedEcts < 16){
+            message = "Pas op! Op dit moment heb je " + failedEcts + " ECT's niet gehaald. Bij het aantal van 16 niet gehaalde ECT's en hoger" +
+                    " ontvang je een BSA";
+        } else {
+            message = "Op dit moment heb je " + failedEcts + " ECT's niet behaald. Op dit moment betekent dit een BSA.";
+        }
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        //do things
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 }
