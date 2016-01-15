@@ -58,7 +58,7 @@ public class OverzichtActivity extends AppCompatActivity {
         mChart.setDescription("Studievoortgang");
         mChart.setTouchEnabled(true);
         mChart.setDrawSliceText(true);
-        mChart.getLegend().setEnabled(false);
+        mChart.getLegend().setEnabled(true);
         mChart.setTransparentCircleColor(Color.rgb(130, 130, 130));
         mChart.animateY(1400, Easing.EasingOption.EaseInOutQuad);
 
@@ -68,7 +68,7 @@ public class OverzichtActivity extends AppCompatActivity {
             public void onValueSelected(Entry e, int dataSetIndex, Highlight h) {
                 // COUNT CHART VALUE SELECTED
                 AlertDialog.Builder builder = new AlertDialog.Builder(OverzichtActivity.this);
-                builder.setMessage("Look at this dialog!")
+                builder.setMessage(dataSetIndex)
                         .setCancelable(false)
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
