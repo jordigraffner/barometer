@@ -23,10 +23,9 @@ import graffner.jordi.barometer.database.DatabaseInfo;
 
 public class OverzichtActivity extends AppCompatActivity {
     private PieChart mChart;
-    public static final int MAX_ECTS = 60;
-    public static int currentEcts = 0;
-    public static int unknowntEcts = 60;
-    public static int failedEcts = 0;
+    public static int currentEcts;
+    public static int unknowntEcts;
+    public static int failedEcts;
     private DatabaseHelper dbHelper;
     private List<CourseModel> courseModels = new ArrayList<>();
 
@@ -34,6 +33,10 @@ public class OverzichtActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_overzicht);
+
+        this.currentEcts = 0;
+        unknowntEcts = 60;
+        failedEcts = 0;
 
         dbHelper = DatabaseHelper.getHelper(this);
         Cursor res = dbHelper.query(DatabaseInfo.BarometerTables.COURSE, new String[]{"*"}, null, null, null, null, null);
@@ -75,14 +78,20 @@ public class OverzichtActivity extends AppCompatActivity {
             }
         }
 
-        yValues.add(new Entry(unknowntEcts, 0));
-        xValues.add("Resterend ECTS");
+        if (unknowntEcts > 0) {
+            yValues.add(new Entry(unknowntEcts, 0));
+            xValues.add("Resterend ECTS");
+        }
 
-        yValues.add(new Entry(currentEcts, 1));
-        xValues.add("Behaalde ECTS");
+        if(currentEcts > 0) {
+            yValues.add(new Entry(currentEcts, 1));
+            xValues.add("Behaalde ECTS");
+        }
 
-        yValues.add(new Entry(failedEcts, 2));
-        xValues.add("Niet behaald");
+        if(failedEcts > 0) {
+            yValues.add(new Entry(failedEcts, 2));
+            xValues.add("Niet behaald");
+        }
 
 //        yValues.add(new Entry(60 - currentEcts, 1));
 //        xValues.add("Resterend ECTS");
