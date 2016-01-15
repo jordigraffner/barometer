@@ -20,13 +20,21 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
-    <TextView
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="World Best Developers"
-        android:id="@+id/titlecredit"
+        android:id="@+id/imageTitleCredit"
+        android:src="@drawable/theworldbestdevelopers"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="62dp" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageFooterHSLeiden"
+        android:src="@drawable/hogeschoolleiden"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

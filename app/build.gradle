@@ -37,4 +37,5 @@ dependencies {
     compile 'com.github.PhilJay:MPAndroidChart:v2.1.5'
     compile 'co.lemonlabs:expandable-button-menu:1.0.0'
     compile 'com.victor.ringbutton:lib:1.0.1'
+    compile 'com.rengwuxian.materialedittext:library:2.1.4'
 }

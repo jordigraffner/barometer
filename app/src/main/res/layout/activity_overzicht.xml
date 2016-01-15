@@ -12,7 +12,14 @@
         android:id="@+id/chart" >
     </com.github.mikephil.charting.charts.PieChart>
 
-
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView3"
+        android:src="@drawable/hogeschoolleiden"
+        android:layout_alignBottom="@+id/chart"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 
 </RelativeLayout>

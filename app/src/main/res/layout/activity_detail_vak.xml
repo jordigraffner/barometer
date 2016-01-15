@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,21 +10,65 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="edit"
+        android:text="   edit   "
         android:id="@+id/btnEdit"
-        android:layout_gravity="right" />
+        android:layout_gravity="right"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 
-    <TextView
-        android:id="@+id/subject_name"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/subject_period"
+        android:layout_alignRight="@+id/imageView2"
+        android:layout_alignEnd="@+id/imageView2"
+        android:id="@+id/linearLayout">
+
+        <TextView
+            android:id="@+id/subject_cijfers"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="20dp"
+            android:text="Cijfer"
+            android:orientation="horizontal"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <EditText
+        android:id="@+id/subject_grade"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
         android:paddingTop="20dp"
-        android:text=" DEZE TEXT LEES IK TERUG "
-        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+        android:text="cijfers"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:layout_alignParentRight="true"
+        android:inputType="numberDecimal"
+        android:maxLength="3"
+        android:focusable="false"
         />
+
+    </LinearLayout>
+    <TextView
+        android:id="@+id/subject_period"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="20dp"
+        android:text="Periode"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:layout_below="@+id/subject_ects"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:id="@+id/subject_ects"
@@ -33,49 +77,33 @@
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
         android:paddingTop="20dp"
-        android:text=" EN DEZE TEXT OOK "
+        android:text="ECTS"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:layout_gravity="center_vertical" />
-    <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_gravity="center_vertical"
+        android:layout_below="@+id/subject_name"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:id="@+id/imageView2"
+        android:src="@drawable/hogeschoolleiden"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 
     <TextView
-        android:id="@+id/subject_cijfers"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:paddingTop="20dp"
-        android:text=" EN DEZE TEXT OOK "
-        android:orientation="horizontal"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
-
-    <EditText
-        android:id="@+id/subject_grade"
+        android:id="@+id/subject_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
         android:paddingTop="20dp"
-        android:text=" EN DEZE TEXT OOK "
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:layout_alignParentRight="true"
-        android:inputType="numberDecimal"
-        android:maxLength="3"
-        android:focusable="false"
-        />
-        </LinearLayout>
-    <TextView
-        android:id="@+id/subject_period"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:paddingTop="20dp"
-        android:text=" EN DEZE TEXT OOK "
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        android:text="Naam : module"
+        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+        android:layout_below="@+id/btnEdit"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 
-</LinearLayout>
+</RelativeLayout>
