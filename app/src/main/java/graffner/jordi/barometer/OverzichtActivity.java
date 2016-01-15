@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -36,6 +37,9 @@ public class OverzichtActivity extends AppCompatActivity {
     public static int failedEcts;
     private DatabaseHelper dbHelper;
     private List<CourseModel> courseModels = new ArrayList<>();
+    private ArrayList<Entry> yValues = new ArrayList<>();
+    private ArrayList<String> xValues = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,38 +66,6 @@ public class OverzichtActivity extends AppCompatActivity {
         mChart.setTransparentCircleColor(Color.rgb(130, 130, 130));
         mChart.animateY(1400, Easing.EasingOption.EaseInOutQuad);
 
-        mChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
-
-            @Override
-            public void onValueSelected(Entry e, int dataSetIndex, Highlight h) {
-                // COUNT CHART VALUE SELECTED
-                AlertDialog.Builder builder = new AlertDialog.Builder(OverzichtActivity.this);
-                builder.setMessage(dataSetIndex)
-                        .setCancelable(false)
-                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                //do things
-                            }
-                        });
-                AlertDialog alert = builder.create();
-                alert.show();
-            }
-
-            @Override
-            public void onNothingSelected() {
-                AlertDialog.Builder builder = new AlertDialog.Builder(OverzichtActivity.this);
-                builder.setMessage("Look at this dialog!")
-                        .setCancelable(false)
-                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                //do things
-                            }
-                        });
-                AlertDialog alert = builder.create();
-                alert.show();
-            }
-        });
-
         setData(0);
     }
 
@@ -105,8 +77,6 @@ public class OverzichtActivity extends AppCompatActivity {
         lijst[1] = 6.6;
         lijst[2] = 0.0;
 
-        ArrayList<Entry> yValues = new ArrayList<>();
-        ArrayList<String> xValues = new ArrayList<>();
 
         for(CourseModel course: courseModels){
             if(Double.parseDouble(course.grade) > 5.4) {
@@ -164,6 +134,38 @@ public class OverzichtActivity extends AppCompatActivity {
         }
 
         mChart.invalidate();        // Aanroepen van een volledige redraw
+        mChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+
+            @Override
+            public void onValueSelected(Entry e, int dataSetIndex, Highlight h) {
+
+                if (e == null)
+                    return;
+                Log.i("VAL SELECTED",
+                        "Value: " + e.getVal() + ", xIndex: " + e.getXIndex()
+                                + ", DataSet index: " + dataSetIndex + " " + xValues.get(e.getXIndex()));
+
+                String nameValue = xValues.get(e.getXIndex());
+
+                Intent myIntent = new Intent(OverzichtActivity.this, SelectedCoursesActivity.class);
+                myIntent.putExtra("key", nameValue);
+                startActivity(myIntent);
+            }
+
+            @Override
+            public void onNothingSelected() {
+                AlertDialog.Builder builder = new AlertDialog.Builder(OverzichtActivity.this);
+                builder.setMessage("Look at this dialog!")
+                        .setCancelable(false)
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                //do things
+                            }
+                        });
+                AlertDialog alert = builder.create();
+                alert.show();
+            }
+        });
     }
 
     public void showBsaAlert(){

@@ -62,7 +62,9 @@ public class DetailVakActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail_vak);
 
         Intent myIntent = getIntent();
-       final String modelName = myIntent.getStringExtra("key"); // will return "FirstKeyValue"
+
+        //returned Course naam om verder te zoeken in DB
+        final String modelName = myIntent.getStringExtra("key");
 
 
         dbHelper = DatabaseHelper.getHelper(this);
