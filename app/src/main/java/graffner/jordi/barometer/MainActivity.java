@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
     private void requestSubjects(){
         Type type = new TypeToken<List<CourseModel>>(){}.getType();
 
-        GsonRequest<List<CourseModel>> request = new GsonRequest<List<CourseModel>>("http://tjin.myqnapcloud.com/subject_lijst.json", //http://www.fuujokan.nl/subject_lijst.json//
+        GsonRequest<List<CourseModel>> request = new GsonRequest<List<CourseModel>>("http://www.fuujokan.nl/subject_lijst.json",
                 type, null, new Response.Listener<List<CourseModel>>() {
             @Override
             public void onResponse(List<CourseModel> response) {

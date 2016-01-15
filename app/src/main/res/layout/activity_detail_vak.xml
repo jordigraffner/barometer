@@ -14,6 +14,7 @@
         android:id="@+id/btnEdit"
         android:layout_gravity="right" />
 
+
     <TextView
         android:id="@+id/subject_name"
         android:layout_width="wrap_content"

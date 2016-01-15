@@ -13,8 +13,7 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:noHistory="true">
-
+            android:noHistory="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,6 +27,8 @@
         <activity android:name=".OverzichtActivity" >
         </activity>
         <activity android:name=".DetailVakActivity" >
+        </activity>
+        <activity android:name=".CreditActivity" >
         </activity>
     </application>
 
