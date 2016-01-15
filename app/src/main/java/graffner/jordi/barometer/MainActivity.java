@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         Cursor rs = dbHelper.query(DatabaseInfo.BarometerTables.USER, new String[]{"*"}, null, null, null, null, null);
         if (rs.getCount() > 0) {
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
+            finish();
         } else {
             final Button btnLogin = (Button) findViewById(R.id.btnLogin);
             final EditText txtName = (EditText) findViewById(R.id.txtName);
@@ -51,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
                     dbHelper.insert(DatabaseInfo.BarometerTables.USER, null, values);
                     requestSubjects();
                     startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                    finish();
                 }
             });
         }

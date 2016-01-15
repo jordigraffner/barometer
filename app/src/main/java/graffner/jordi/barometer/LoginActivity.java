@@ -2,20 +2,18 @@ package graffner.jordi.barometer;
 
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.DatabaseUtils;
-import android.support.v7.app.AppCompatActivity;
+
+
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
 
 import graffner.jordi.barometer.database.DatabaseHelper;
 import graffner.jordi.barometer.database.DatabaseInfo;
 import lt.lemonlabs.android.expandablebuttonmenu.ExpandableButtonMenu;
 import lt.lemonlabs.android.expandablebuttonmenu.ExpandableMenuOverlay;
 
-public class LoginActivity extends AppCompatActivity  {
+public class LoginActivity extends AppCompatActivity {
 
     private DatabaseHelper dbHelper;
     private ExpandableMenuOverlay menuOverlay;
@@ -29,10 +27,6 @@ public class LoginActivity extends AppCompatActivity  {
         rs.moveToFirst();
         String name = (String) rs.getString(rs.getColumnIndex("name"));
         Log.d("Dit is output ", "dit " + name);
-
-        Cursor res = dbHelper.query(DatabaseInfo.BarometerTables.COURSE, new String[]{"*"}, null, null, null, null, null);
-        res.moveToFirst();   // kan leeg zijn en faalt dan
-        DatabaseUtils.dumpCursor(rs);
 
         menuOverlay = (ExpandableMenuOverlay) findViewById(R.id.button_menu);
 
@@ -53,6 +47,5 @@ public class LoginActivity extends AppCompatActivity  {
                 }
             }
         });
-
     }
 }

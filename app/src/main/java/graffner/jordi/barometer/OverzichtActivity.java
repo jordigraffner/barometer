@@ -42,7 +42,7 @@ public class OverzichtActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_overzicht);
 
-        this.currentEcts = 0;
+        currentEcts = 0;
         unknowntEcts = 60;
         failedEcts = 0;
 
@@ -118,39 +118,37 @@ public class OverzichtActivity extends AppCompatActivity {
             }
         }
 
+        int teller = 0;
+        ArrayList<Integer> colors = new ArrayList<>();
+
         if (unknowntEcts > 0) {
-            yValues.add(new Entry(unknowntEcts, 0));
+            yValues.add(new Entry(unknowntEcts, teller));
             xValues.add("Resterend ECTS");
+            colors.add(Color.rgb(255,255,0));
+            teller++;
         }
 
         if(currentEcts > 0) {
-            yValues.add(new Entry(currentEcts, 1));
+            yValues.add(new Entry(currentEcts, teller));
             xValues.add("Behaalde ECTS");
+            colors.add(Color.rgb(0, 255, 0));
+            teller++;
         }
 
         if(failedEcts > 0) {
-            yValues.add(new Entry(failedEcts, 2));
+            yValues.add(new Entry(failedEcts, teller));
             xValues.add("Niet behaald");
+            colors.add(Color.rgb(255, 0, 0));
+            teller++;
         }
 
-//        yValues.add(new Entry(60 - currentEcts, 1));
-//        xValues.add("Resterend ECTS");
-//
-//        yValues.add(new Entry(aantal, 0));
-//        xValues.add("Behaalde ECTS");
-//
-//        yValues.add(new Entry(60 - currentEcts, 1));
-//        xValues.add("Niet Behaald ECTS");
-
-
-
         //  http://www.materialui.co/colors
-        ArrayList<Integer> colors = new ArrayList<>();
-       colors.add(Color.rgb(255,255,0));
 
-        colors.add(Color.rgb(0,255,0));
 
-        colors.add(Color.rgb(255, 0, 0));
+
+
+
+
 
 
         PieDataSet dataSet = new PieDataSet(yValues, "ECTS");
@@ -160,11 +158,12 @@ public class OverzichtActivity extends AppCompatActivity {
         PieData data = new PieData(xValues, dataSet);
 
         mChart.setData(data);        // bind je dataset aan de chart.
-        mChart.invalidate();        // Aanroepen van een volledige redraw
         Log.d("aantal =", "" + currentEcts);
         if(failedEcts > 9){
             showBsaAlert();
         }
+
+        mChart.invalidate();        // Aanroepen van een volledige redraw
     }
 
     public void showBsaAlert(){
