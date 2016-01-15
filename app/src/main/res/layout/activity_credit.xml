@@ -8,17 +8,27 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    android:background="#54D2E4"
+    android:background="@drawable/achtergrond"
 
     tools:context="graffner.jordi.barometer.CreditActivity">
 
     <com.victor.ringbutton.RingButton
         android:id="@+id/ringButton"
-                app:ringbutton_downText="Hand Write"
-        app:ringbutton_upDrawable="@drawable/pasfoto1"
-        app:ringbutton_downDrawable="@drawable/hand_write"
-        android:layout_centerInParent="true"
-        android:layout_width="300dp"
-        android:layout_height="300dp"/>
+        android:alpha="1"
+        app:ringbutton_upDrawable="@drawable/foto_klein1"
+        app:ringbutton_downDrawable="@drawable/jordi_klein"
+        android:layout_width="240dp"
+        android:layout_height="240dp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="World Best Developers"
+        android:id="@+id/titlecredit"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="62dp" />
 
 </RelativeLayout>

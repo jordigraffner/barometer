@@ -16,13 +16,17 @@ public class CreditActivity extends AppCompatActivity {
         RingButton ringButton = (RingButton) findViewById(R.id.ringButton);
         ringButton.setOnClickListener(new RingButton.OnClickListener() {
             @Override
-            public void clickUp() {
+            public void clickUp() {Toast.makeText(getApplicationContext(), "Wesley Tjin " +
+                    "S1085167 " +
+                    "IKPMD", Toast.LENGTH_LONG).show();
 
             }
 
             @Override
             public void clickDown() {
-                Toast.makeText(getApplicationContext(), "Click down", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Jordi Gräffner " +
+                        "S1075180 " +
+                        "IKPMD", Toast.LENGTH_LONG).show();
             }
         });
     }
