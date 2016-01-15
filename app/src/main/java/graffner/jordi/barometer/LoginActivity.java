@@ -1,24 +1,30 @@
 package graffner.jordi.barometer;
 
-import android.content.ContentValues;
-import android.content.Intent;
+
+import android.content.Context;
 import android.database.Cursor;
-import android.database.DatabaseUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
+import android.view.Menu;
+import android.widget.GridView;
 
-import javax.security.auth.login.LoginException;
+import java.util.ArrayList;
 
+import graffner.jordi.barometer.adapter.MenuAdapter;
 import graffner.jordi.barometer.database.DatabaseHelper;
 import graffner.jordi.barometer.database.DatabaseInfo;
+
 
 public class LoginActivity extends AppCompatActivity {
 
     private DatabaseHelper dbHelper;
+    GridView gv;
+    Context context;
+    ArrayList prgmName;
+    public static String [] prgmNameList={"home", "twee"};
+    public static int [] prgmImages={R.drawable.lists,R.drawable.overview};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,21 +36,10 @@ public class LoginActivity extends AppCompatActivity {
         String name = (String) rs.getString(rs.getColumnIndex("name"));
         Log.d("Dit is output ", "dit " + name);
 
-        Cursor res = dbHelper.query(DatabaseInfo.BarometerTables.COURSE, new String[]{"*"}, null, null, null, null, null);
-        res.moveToFirst();   // kan leeg zijn en faalt dan
-        DatabaseUtils.dumpCursor(rs);
+        gv=(GridView) findViewById(R.id.gridView1);
+        gv.setAdapter(new MenuAdapter(this, prgmNameList, prgmImages));
 
-        final Button btnInvoer = (Button) findViewById(R.id.btnInvoer);
-        btnInvoer.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, InvoerActivity.class));
-            }
-        });
-        final Button btnOverzicht = (Button) findViewById(R.id.btnOverzicht);
-        btnOverzicht.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, OverzichtActivity.class));
-            }
-        });
+
+
     }
 }
