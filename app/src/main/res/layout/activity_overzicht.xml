@@ -12,17 +12,7 @@
         android:id="@+id/chart" >
     </com.github.mikephil.charting.charts.PieChart>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="+2"
-        android:id="@+id/plusTweeTest"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="63dp"
-        android:layout_marginEnd="63dp"
-        android:layout_marginBottom="56dp" />
+
 
 
 </RelativeLayout>

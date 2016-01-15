@@ -17,6 +17,8 @@ import graffner.jordi.barometer.R;
  */
 public class InvoerAdapter extends ArrayAdapter<CourseModel> {
 
+
+
 public InvoerAdapter(Context context, int resource, List<CourseModel> objects){
         super(context, resource, objects);
         }

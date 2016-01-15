@@ -48,8 +48,9 @@ public class InvoerActivity extends AppCompatActivity {
                                              }
                                          }
         );
-        Cursor res = dbHelper.query(DatabaseInfo.BarometerTables.COURSE, new String[]{"*"}, null, null, null, null, null);
-        res.moveToFirst();
+        Cursor res = dbHelper.query(DatabaseInfo.BarometerTables.COURSE, new String[]{"*"}, null, null, null, null,DatabaseInfo.CourseColumn.PERIOD + " ASC" );
+        res.movieToFirst();
+        courseModels.add(new CourseModel(res.getString(res.getColumnIndex("name")), res.getString(res.getColumnIndex("ects")), res.getString(res.getColumnIndex("grade")), res.getString(res.getColumnIndex("period"))));
         while (res.moveToNext()) {
             courseModels.add(new CourseModel(res.getString(res.getColumnIndex("name")), res.getString(res.getColumnIndex("ects")), res.getString(res.getColumnIndex("grade")), res.getString(res.getColumnIndex("period"))));
         }

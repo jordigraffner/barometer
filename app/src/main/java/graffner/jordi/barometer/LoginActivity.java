@@ -1,30 +1,24 @@
 package graffner.jordi.barometer;
 
-
-import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.widget.GridView;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
-import java.util.ArrayList;
-
-import graffner.jordi.barometer.adapter.MenuAdapter;
 import graffner.jordi.barometer.database.DatabaseHelper;
 import graffner.jordi.barometer.database.DatabaseInfo;
+import lt.lemonlabs.android.expandablebuttonmenu.ExpandableButtonMenu;
+import lt.lemonlabs.android.expandablebuttonmenu.ExpandableMenuOverlay;
 
-
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity  {
 
     private DatabaseHelper dbHelper;
-    GridView gv;
-    Context context;
-    ArrayList prgmName;
-    public static String [] prgmNameList={"home", "twee"};
-    public static int [] prgmImages={R.drawable.lists,R.drawable.overview};
-
+    private ExpandableMenuOverlay menuOverlay;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,10 +30,29 @@ public class LoginActivity extends AppCompatActivity {
         String name = (String) rs.getString(rs.getColumnIndex("name"));
         Log.d("Dit is output ", "dit " + name);
 
-        gv=(GridView) findViewById(R.id.gridView1);
-        gv.setAdapter(new MenuAdapter(this, prgmNameList, prgmImages));
+        Cursor res = dbHelper.query(DatabaseInfo.BarometerTables.COURSE, new String[]{"*"}, null, null, null, null, null);
+        res.moveToFirst();   // kan leeg zijn en faalt dan
+        DatabaseUtils.dumpCursor(rs);
 
+        menuOverlay = (ExpandableMenuOverlay) findViewById(R.id.button_menu);
 
+        menuOverlay.setOnMenuButtonClickListener(new ExpandableButtonMenu.OnMenuButtonClick() {
+            @Override
+            public void onClick(ExpandableButtonMenu.MenuButton action) {
+                switch (action) {
+                    case MID:
+                        startActivity(new Intent(LoginActivity.this, OverzichtActivity.class));
+                        menuOverlay.getButtonMenu().toggle();
+                        break;
+                    case LEFT:
+                        startActivity(new Intent(LoginActivity.this, InvoerActivity.class));
+                        break;
+                    case RIGHT:
+                        startActivity(new Intent(LoginActivity.this, CreditActivity.class));
+                        break;
+                }
+            }
+        });
 
     }
 }

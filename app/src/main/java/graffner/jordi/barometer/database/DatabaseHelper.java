@@ -14,7 +14,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static SQLiteDatabase mSQLDB;
     private static DatabaseHelper mInstance;
     public static final String dbName = "barometer.db";
-    public static final int dbVersion = 7;
+    public static final int dbVersion = 22;
 
     public DatabaseHelper(Context ctx) {
         super(ctx, dbName, null, dbVersion);					// gebruik de super constructor.
@@ -61,5 +61,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Cursor query(String table, String[] columns, String selection, String[] selectArgs, String groupBy, String having, String orderBy){
         return mSQLDB.query(table, columns, selection, selectArgs, groupBy, having, orderBy);
     }
+
 
 }
