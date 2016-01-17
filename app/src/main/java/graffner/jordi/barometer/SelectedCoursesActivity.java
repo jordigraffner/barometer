@@ -20,8 +20,8 @@ import graffner.jordi.barometer.database.DatabaseInfo;
 
 public class SelectedCoursesActivity extends AppCompatActivity {
 
-    private int compareGradeStart;
-    private int compareGradeEnd;
+    private double compareGradeStart;
+    private double compareGradeEnd;
     private List<CourseModel> courseModels = new ArrayList<>();
     private List<CourseModel> showCourses = new ArrayList<>();
     private  DatabaseHelper dbHelper = DatabaseHelper.getHelper(this);
@@ -34,17 +34,21 @@ public class SelectedCoursesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_selected_courses);
 
         Intent myIntent = getIntent();
+        TextView title = (TextView)findViewById(R.id.txtSelectedCourseTitle);
 
         final String valueName = myIntent.getStringExtra("key"); // will return "FirstKeyValue"
         if(valueName.equals("Resterend ECTS")){
             compareGradeStart = 0;
             compareGradeEnd = 0;
+            title.setText("Vakken nog niet ingevoerd");
         } else if(valueName.equals(("Behaalde ECTS"))){
-            compareGradeStart = 6;
+            compareGradeStart = 5.5;
             compareGradeEnd = 10;
+            title.setText("Behaalde vakken");
         } else{
             compareGradeStart = 1;
-            compareGradeEnd = 5;
+            compareGradeEnd = 5.4;
+            title.setText("Niet behaalde vakken");
         }
         loadCourses();
         for(CourseModel course: courseModels){

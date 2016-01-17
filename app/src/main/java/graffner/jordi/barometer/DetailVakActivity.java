@@ -19,39 +19,51 @@ import android.widget.TextView;
 import graffner.jordi.barometer.Model.CourseModel;
 import graffner.jordi.barometer.database.DatabaseHelper;
 import graffner.jordi.barometer.database.DatabaseInfo;
+import graffner.jordi.barometer.regex.DecimalDigitsInputFilter;
+
 
 public class DetailVakActivity extends AppCompatActivity {
     private DatabaseHelper dbHelper;
     private CourseModel course;
     public static SQLiteDatabase mSQLDB;
     private boolean btnStatus = true;
-    public class InputFilterMinMax implements InputFilter {
+    public class InputFilterDecimalMinMax implements InputFilter {
 
-        private int min, max;
+        private double min, max;
 
-        public InputFilterMinMax(int min, int max) {
+        public InputFilterDecimalMinMax(double min, double max) {
             this.min = min;
             this.max = max;
         }
 
-        public InputFilterMinMax(String min, String max) {
-            this.min = Integer.parseInt(min);
-            this.max = Integer.parseInt(max);
+        public InputFilterDecimalMinMax(String min, String max) {
+            this.min = Double.parseDouble(min);
+            this.max = Double.parseDouble(max);
         }
 
         @Override
-        public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+        public CharSequence filter(CharSequence source, int start, int end,
+                                   Spanned dest, int dstart, int dend) {
             try {
-                int input = Integer.parseInt(dest.toString() + source.toString());
-                if (isInRange(min, max, input))
+                String value = dest.subSequence(0, dstart).toString()
+                        + source.subSequence(start, end)
+                        + dest.subSequence(dend, dest.length());
+                if (value.isEmpty() || value.equals("-")) {
                     return null;
-            } catch (NumberFormatException nfe) { }
-            return "";
+                }
+                double input = Double.parseDouble(value);
+                if (isInRange(min, max, input)) {
+                    return null;
+                }
+            } catch (NumberFormatException nfe) {
+            }
+            return dest.subSequence(dstart, dend);
         }
 
-        private boolean isInRange(int a, int b, int c) {
+        private boolean isInRange(double a, double b, double c) {
             return b > a ? c >= a && c <= b : c >= b && c <= a;
         }
+
     }
 
 
@@ -97,14 +109,14 @@ public class DetailVakActivity extends AppCompatActivity {
                     btnStatus = false;
                     EditText mEdit = (EditText) findViewById(R.id.subject_grade);
                     mEdit.setFocusableInTouchMode(true);
-                    mEdit.setFilters(new InputFilter[]{new InputFilterMinMax("1", "10")});
+                    mEdit.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(2,1),new InputFilterDecimalMinMax(1.0, 10.0) });
                     mEdit.setEnabled(true);
                 } else {
                     btnEdit.setText("Edit");
                     btnStatus = true;
                     EditText mEdit = (EditText) findViewById(R.id.subject_grade);
                     mEdit.setEnabled(false);
-                    mEdit.setFilters(new InputFilter[]{ new InputFilterMinMax("1", "10")});
+                    mEdit.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(2,1), new InputFilterDecimalMinMax(1.0, 10.0)});
                     String where = DatabaseInfo.CourseColumn.NAME+ "= '"+ modelName +"'" ;
                     ContentValues values = new ContentValues();
                     mSQLDB = dbHelper.getWritableDatabase();
