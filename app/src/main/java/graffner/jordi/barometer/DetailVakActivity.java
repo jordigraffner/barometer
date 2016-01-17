@@ -8,14 +8,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.text.Spanned;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
-
-
 import graffner.jordi.barometer.Model.CourseModel;
 import graffner.jordi.barometer.database.DatabaseHelper;
 import graffner.jordi.barometer.database.DatabaseInfo;
@@ -59,14 +55,11 @@ public class DetailVakActivity extends AppCompatActivity {
             }
             return dest.subSequence(dstart, dend);
         }
-
         private boolean isInRange(double a, double b, double c) {
             return b > a ? c >= a && c <= b : c >= b && c <= a;
         }
 
     }
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,16 +118,7 @@ public class DetailVakActivity extends AppCompatActivity {
 
 
                 }
-
-
             }
         });
-
-
-
-
-
-
-
     }
 }

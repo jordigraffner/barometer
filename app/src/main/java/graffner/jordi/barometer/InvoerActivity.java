@@ -9,10 +9,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import graffner.jordi.barometer.Model.CourseModel;
 import graffner.jordi.barometer.adapter.InvoerAdapter;
 import graffner.jordi.barometer.database.DatabaseHelper;

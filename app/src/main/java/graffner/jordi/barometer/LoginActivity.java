@@ -2,12 +2,9 @@ package graffner.jordi.barometer;
 
 import android.content.Intent;
 import android.database.Cursor;
-
-
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-
 import graffner.jordi.barometer.database.DatabaseHelper;
 import graffner.jordi.barometer.database.DatabaseInfo;
 import lt.lemonlabs.android.expandablebuttonmenu.ExpandableButtonMenu;
@@ -17,6 +14,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private DatabaseHelper dbHelper;
     private ExpandableMenuOverlay menuOverlay;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

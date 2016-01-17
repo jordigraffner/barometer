@@ -12,6 +12,8 @@
     android:background="@drawable/back_klein"
     android:focusable="false">
 
+
+
     <lt.lemonlabs.android.expandablebuttonmenu.ExpandableMenuOverlay
         android:id="@+id/button_menu"
         android:layout_width="0dp"
@@ -36,5 +38,4 @@
         ebm:leftButtonText="@string/action_left"
         ebm:midButtonText="@string/action_mid"
         ebm:rightButtonText="@string/action_right"/>
-        />
 </RelativeLayout>
