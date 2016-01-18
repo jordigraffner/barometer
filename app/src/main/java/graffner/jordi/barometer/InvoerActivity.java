@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.List;
 import graffner.jordi.barometer.Model.CourseModel;
@@ -33,9 +34,6 @@ public class InvoerActivity extends AppCompatActivity {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                              @Override
                                              public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                                                 Toast t = Toast.makeText(InvoerActivity.this, "Click" + position, Toast.LENGTH_LONG);
-                                                 t.show();
-
                                                  String courseName = ((TextView) view.findViewById(R.id.subject_name)).getText().toString();
 
                                                  Intent myIntent = new Intent(InvoerActivity.this, DetailVakActivity.class);

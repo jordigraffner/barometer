@@ -38,4 +38,6 @@ dependencies {
     compile 'co.lemonlabs:expandable-button-menu:1.0.0'
     compile 'com.victor.ringbutton:lib:1.0.1'
     compile 'com.rengwuxian.materialedittext:library:2.1.4'
+    compile 'com.github.uguratar:countingtextview:3a5920b519'
+
 }

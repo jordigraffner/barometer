@@ -5,6 +5,15 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.animation.LinearInterpolator;
+import android.widget.TextView;
+
+import com.uguratar.countingtextview.countingTextView;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import graffner.jordi.barometer.Model.CourseModel;
 import graffner.jordi.barometer.database.DatabaseHelper;
 import graffner.jordi.barometer.database.DatabaseInfo;
 import lt.lemonlabs.android.expandablebuttonmenu.ExpandableButtonMenu;
@@ -14,6 +23,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private DatabaseHelper dbHelper;
     private ExpandableMenuOverlay menuOverlay;
+    private countingTextView points;
+    private List<CourseModel> courseModels = new ArrayList<>();    // NEED A METHOD TO FILL THIS. RETRIEVE THE DATA FROM JSON
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +36,15 @@ public class LoginActivity extends AppCompatActivity {
         rs.moveToFirst();
         String name = (String) rs.getString(rs.getColumnIndex("name"));
         Log.d("Dit is output ", "dit " + name);
+
+        TextView welcome = ((TextView) findViewById(R.id.txtWelcome));
+        welcome.setText("Welkom " + name);
+
+        loadCourses();
+
+        points = (countingTextView) findViewById(R.id.countingText);
+//Animate from 0 to 250
+        points.animateText(0,calculateReceivedEct(courseModels));
 
         menuOverlay = (ExpandableMenuOverlay) findViewById(R.id.button_menu);
 
@@ -45,5 +65,25 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public void loadCourses(){
+        Cursor res = dbHelper.query(DatabaseInfo.BarometerTables.COURSE, new String[]{"*"}, null, null, null, null, null);
+        //Laad courses in list
+        res.moveToFirst();
+        courseModels.add(new CourseModel(res.getString(res.getColumnIndex("name")), res.getString(res.getColumnIndex("ects")), res.getString(res.getColumnIndex("grade")), res.getString(res.getColumnIndex("period"))));
+        while(res.moveToNext()){
+            courseModels.add(new CourseModel(res.getString(res.getColumnIndex("name")),res.getString(res.getColumnIndex("ects")), res.getString(res.getColumnIndex("grade")), res.getString(res.getColumnIndex("period"))));
+        }
+    }
+
+    public int calculateReceivedEct(List<CourseModel> courses){
+        int ect = 0;
+        for(CourseModel course: courses) {
+            if (Double.parseDouble(course.grade) > 5.4) {
+                ect += Integer.parseInt(course.ects);
+            }
+        }
+        return ect;
     }
 }

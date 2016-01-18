@@ -13,7 +13,6 @@
     android:focusable="false">
 
 
-
     <lt.lemonlabs.android.expandablebuttonmenu.ExpandableMenuOverlay
         android:id="@+id/button_menu"
         android:layout_width="0dp"
@@ -38,4 +37,40 @@
         ebm:leftButtonText="@string/action_left"
         ebm:midButtonText="@string/action_mid"
         ebm:rightButtonText="@string/action_right"/>
+
+    <GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/countingText"
+        android:layout_centerHorizontal="true"
+        android:columnCount="1"
+        android:rowCount="3">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Large Text"
+            android:id="@+id/txtWelcome" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Behaalde ECT&apos;s"
+            android:id="@+id/textView"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <com.uguratar.countingtextview.countingTextView
+            android:id="@+id/countingText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textIsSelectable="false"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_toRightOf="@+id/textView"
+            android:layout_alignRight="@+id/textView"
+            android:layout_alignEnd="@+id/textView" />
+
+    </GridLayout>
 </RelativeLayout>
