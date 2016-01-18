@@ -98,14 +98,14 @@ public class DetailVakActivity extends AppCompatActivity {
         btnEdit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (btnStatus == true) {
-                    btnEdit.setText("Save");
+                    btnEdit.setText("   Save   ");
                     btnStatus = false;
                     EditText mEdit = (EditText) findViewById(R.id.subject_grade);
                     mEdit.setFocusableInTouchMode(true);
                     mEdit.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(2,1),new InputFilterDecimalMinMax(1.0, 10.0) });
                     mEdit.setEnabled(true);
                 } else {
-                    btnEdit.setText("Edit");
+                    btnEdit.setText("   Edit   ");
                     btnStatus = true;
                     EditText mEdit = (EditText) findViewById(R.id.subject_grade);
                     mEdit.setEnabled(false);
