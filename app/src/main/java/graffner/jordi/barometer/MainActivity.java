@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -103,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
             cv.put(DatabaseInfo.CourseColumn.ECTS, cm.ects);
             cv.put(DatabaseInfo.CourseColumn.PERIOD , cm.period);
             dbHelper.insert(DatabaseInfo.BarometerTables.COURSE, null, cv);
+            Log.d("naam", cm.name);
         }
 
         Cursor rs = dbHelper.query(DatabaseInfo.BarometerTables.COURSE, new String[]{"*"}, null, null, null, null, null);

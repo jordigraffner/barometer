@@ -50,7 +50,13 @@ public class SelectedCoursesActivity extends AppCompatActivity {
             compareGradeEnd = 5.4;
             title.setText("Niet behaalde vakken");
         }
-        loadCourses();
+        Cursor res = dbHelper.query(DatabaseInfo.BarometerTables.COURSE, new String[]{"*"}, null, null, null, null, null);
+        //Laad courses in list
+        res.moveToFirst();
+        courseModels.add(new CourseModel(res.getString(res.getColumnIndex("name")), res.getString(res.getColumnIndex("ects")), res.getString(res.getColumnIndex("grade")), res.getString(res.getColumnIndex("period"))));
+        while(res.moveToNext()){
+            courseModels.add(new CourseModel(res.getString(res.getColumnIndex("name")),res.getString(res.getColumnIndex("ects")), res.getString(res.getColumnIndex("grade")), res.getString(res.getColumnIndex("period"))));
+        }
         for(CourseModel course: courseModels){
             if(Double.parseDouble(course.grade) >= compareGradeStart && Double.parseDouble(course.grade) <= compareGradeEnd){
                 showCourses.add(course);
@@ -63,12 +69,6 @@ public class SelectedCoursesActivity extends AppCompatActivity {
     }
 
     public void loadCourses(){
-        Cursor res = dbHelper.query(DatabaseInfo.BarometerTables.COURSE, new String[]{"*"}, null, null, null, null, null);
-        //Laad courses in list
-        res.moveToFirst();
-        courseModels.add(new CourseModel(res.getString(res.getColumnIndex("name")), res.getString(res.getColumnIndex("ects")), res.getString(res.getColumnIndex("grade")), res.getString(res.getColumnIndex("period"))));
-        while(res.moveToNext()){
-            courseModels.add(new CourseModel(res.getString(res.getColumnIndex("name")),res.getString(res.getColumnIndex("ects")), res.getString(res.getColumnIndex("grade")), res.getString(res.getColumnIndex("period"))));
-        }
+
     }
 }
