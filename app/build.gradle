@@ -39,5 +39,5 @@ dependencies {
     compile 'com.victor.ringbutton:lib:1.0.1'
     compile 'com.rengwuxian.materialedittext:library:2.1.4'
     compile 'com.github.uguratar:countingtextview:3a5920b519'
-
+    compile 'com.victor:lib:1.0.2'
 }

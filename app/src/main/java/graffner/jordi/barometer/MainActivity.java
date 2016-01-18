@@ -15,6 +15,7 @@ import android.widget.EditText;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.google.gson.reflect.TypeToken;
+import com.victor.loading.rotate.RotateLoading;
 
 import java.lang.reflect.Type;
 import java.util.List;
@@ -28,11 +29,15 @@ import graffner.jordi.barometer.request.VolleyHelper;
 public class MainActivity extends AppCompatActivity {
 
     private DatabaseHelper dbHelper;
+    private RotateLoading rotateLoading;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        setContentView(R.layout.activity_main);
+        rotateLoading = (RotateLoading) findViewById(R.id.rotateloading);
 
         dbHelper = DatabaseHelper.getHelper(this);
         Cursor rs = dbHelper.query(DatabaseInfo.BarometerTables.USER, new String[]{"*"}, null, null, null, null, null);
@@ -110,6 +115,7 @@ public class MainActivity extends AppCompatActivity {
         Cursor rs = dbHelper.query(DatabaseInfo.BarometerTables.COURSE, new String[]{"*"}, null, null, null, null, null);
         rs.moveToFirst();   // kan leeg zijn en faalt dan
         DatabaseUtils.dumpCursor(rs);
+        startLoading();
 
     }
 
@@ -118,5 +124,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    private void startLoading() {
+
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(1500);
+                    for (int i = 0; i <= 100; i++) {
+
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        new Thread(runnable).start();
+    }
 }
 

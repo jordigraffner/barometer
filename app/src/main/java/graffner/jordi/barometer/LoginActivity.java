@@ -23,7 +23,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
     private ExpandableMenuOverlay menuOverlay;
-    private  DatabaseHelper dbHelper = DatabaseHelper.getHelper(this);
+    private DatabaseHelper dbHelper = DatabaseHelper.getHelper(this);
     private countingTextView points;
     private List<CourseModel> courseModels = new ArrayList<>();    // NEED A METHOD TO FILL THIS. RETRIEVE THE DATA FROM JSON
 
@@ -37,13 +37,8 @@ public class LoginActivity extends AppCompatActivity {
         String name = (String) rs.getString(rs.getColumnIndex("name"));
         Log.d("Dit is output ", "dit " + name);
 
-        Cursor res = dbHelper.query(DatabaseInfo.BarometerTables.COURSE, new String[]{"*"}, null, null, null, null, null);
-        //Laad courses in list
-        res.moveToFirst();
-        courseModels.add(new CourseModel(res.getString(res.getColumnIndex("name")), res.getString(res.getColumnIndex("ects")), res.getString(res.getColumnIndex("grade")), res.getString(res.getColumnIndex("period"))));
-        while(res.moveToNext()){
-            courseModels.add(new CourseModel(res.getString(res.getColumnIndex("name")),res.getString(res.getColumnIndex("ects")), res.getString(res.getColumnIndex("grade")), res.getString(res.getColumnIndex("period"))));
-        }
+
+
         TextView welcome = ((TextView) findViewById(R.id.txtWelcome));
         welcome.setText("Welkom " + name);
 
