@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
                     values.put(DatabaseInfo.UserColumn.NAME, txtName.getText().toString());
                     dbHelper.insert(DatabaseInfo.BarometerTables.USER, null, values);
                     requestSubjects();
-                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
+
                 }
             });
         }
@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
         Cursor rs = dbHelper.query(DatabaseInfo.BarometerTables.COURSE, new String[]{"*"}, null, null, null, null, null);
         rs.moveToFirst();   // kan leeg zijn en faalt dan
         DatabaseUtils.dumpCursor(rs);
-        startLoading();
+        startActivity(new Intent(MainActivity.this, LoginActivity.class));
 
     }
 
@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    Thread.sleep(1500);
+                    Thread.sleep(15000);
                     for (int i = 0; i <= 100; i++) {
 
                     }

@@ -37,7 +37,13 @@ public class LoginActivity extends AppCompatActivity {
         String name = (String) rs.getString(rs.getColumnIndex("name"));
         Log.d("Dit is output ", "dit " + name);
 
-
+        Cursor res1 = dbHelper.query(DatabaseInfo.BarometerTables.COURSE, new String[]{"*"}, null, null, null, null, null);
+        //Laad courses in list
+        res1.moveToFirst();
+        courseModels.add(new CourseModel(res1.getString(res1.getColumnIndex("name")), res1.getString(res1.getColumnIndex("ects")), res1.getString(res1.getColumnIndex("grade")), res1.getString(res1.getColumnIndex("period"))));
+        while(res1.moveToNext()){
+            courseModels.add(new CourseModel(res1.getString(res1.getColumnIndex("name")),res1.getString(res1.getColumnIndex("ects")), res1.getString(res1.getColumnIndex("grade")), res1.getString(res1.getColumnIndex("period"))));
+        }
 
         TextView welcome = ((TextView) findViewById(R.id.txtWelcome));
         welcome.setText("Welkom " + name);
