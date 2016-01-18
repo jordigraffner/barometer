@@ -70,6 +70,12 @@ public class OverzichtActivity extends AppCompatActivity {
         setData(0);
     }
 
+    public void onBackPressed() {
+        // your code.
+        startActivity(new Intent(OverzichtActivity.this, LoginActivity.class));
+
+    }
+
     private void setData(int aantal) {
         currentEcts = aantal;
 
