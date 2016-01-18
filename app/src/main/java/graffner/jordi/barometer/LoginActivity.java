@@ -21,8 +21,9 @@ import lt.lemonlabs.android.expandablebuttonmenu.ExpandableMenuOverlay;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private DatabaseHelper dbHelper;
+
     private ExpandableMenuOverlay menuOverlay;
+    private  DatabaseHelper dbHelper = DatabaseHelper.getHelper(this);
     private countingTextView points;
     private List<CourseModel> courseModels = new ArrayList<>();    // NEED A METHOD TO FILL THIS. RETRIEVE THE DATA FROM JSON
 
@@ -30,17 +31,21 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        dbHelper = DatabaseHelper.getHelper(this);
         Cursor rs = dbHelper.query(DatabaseInfo.BarometerTables.USER, new String[]{"*"}, null, null, null, null, null);
 
         rs.moveToFirst();
         String name = (String) rs.getString(rs.getColumnIndex("name"));
         Log.d("Dit is output ", "dit " + name);
 
+        Cursor res = dbHelper.query(DatabaseInfo.BarometerTables.COURSE, new String[]{"*"}, null, null, null, null, null);
+        //Laad courses in list
+        res.moveToFirst();
+        courseModels.add(new CourseModel(res.getString(res.getColumnIndex("name")), res.getString(res.getColumnIndex("ects")), res.getString(res.getColumnIndex("grade")), res.getString(res.getColumnIndex("period"))));
+        while(res.moveToNext()){
+            courseModels.add(new CourseModel(res.getString(res.getColumnIndex("name")),res.getString(res.getColumnIndex("ects")), res.getString(res.getColumnIndex("grade")), res.getString(res.getColumnIndex("period"))));
+        }
         TextView welcome = ((TextView) findViewById(R.id.txtWelcome));
         welcome.setText("Welkom " + name);
-
-        loadCourses();
 
         points = (countingTextView) findViewById(R.id.countingText);
 //Animate from 0 to 250
@@ -67,22 +72,13 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    public void loadCourses(){
-        Cursor res = dbHelper.query(DatabaseInfo.BarometerTables.COURSE, new String[]{"*"}, null, null, null, null, null);
-        //Laad courses in list
-        res.moveToFirst();
-        courseModels.add(new CourseModel(res.getString(res.getColumnIndex("name")), res.getString(res.getColumnIndex("ects")), res.getString(res.getColumnIndex("grade")), res.getString(res.getColumnIndex("period"))));
-        while(res.moveToNext()){
-            courseModels.add(new CourseModel(res.getString(res.getColumnIndex("name")),res.getString(res.getColumnIndex("ects")), res.getString(res.getColumnIndex("grade")), res.getString(res.getColumnIndex("period"))));
-        }
-    }
-
     public int calculateReceivedEct(List<CourseModel> courses){
         int ect = 0;
         for(CourseModel course: courses) {
             if (Double.parseDouble(course.grade) > 5.4) {
                 ect += Integer.parseInt(course.ects);
-            }
+
+            }Log.d("cijfer",course.grade);
         }
         return ect;
     }
