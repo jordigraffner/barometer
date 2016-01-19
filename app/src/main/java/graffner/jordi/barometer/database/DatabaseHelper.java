@@ -14,7 +14,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static SQLiteDatabase mSQLDB;
     private static DatabaseHelper mInstance;
     public static final String dbName = "barometer.db";
-    public static final int dbVersion = 55;
+    public static final int dbVersion = 56;
 
 
     public DatabaseHelper(Context ctx) {
