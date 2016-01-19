@@ -161,16 +161,7 @@ public class OverzichtActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected() {
-                AlertDialog.Builder builder = new AlertDialog.Builder(OverzichtActivity.this);
-                builder.setMessage("Look at this dialog!")
-                        .setCancelable(false)
-                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                //do things
-                            }
-                        });
-                AlertDialog alert = builder.create();
-                alert.show();
+                //Doet niks
             }
         });
     }
