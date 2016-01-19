@@ -1,9 +1,14 @@
 package graffner.jordi.barometer;
 
+import android.app.AlertDialog;
 import android.content.ContentValues;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -49,10 +54,14 @@ public class MainActivity extends AppCompatActivity {
             final EditText txtName = (EditText) findViewById(R.id.txtName);
             btnLogin.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    ContentValues values = new ContentValues();
-                    values.put(DatabaseInfo.UserColumn.NAME, txtName.getText().toString());
-                    dbHelper.insert(DatabaseInfo.BarometerTables.USER, null, values);
-                    requestSubjects();
+                    if(isNetworkAvailable()) {
+                        ContentValues values = new ContentValues();
+                        values.put(DatabaseInfo.UserColumn.NAME, txtName.getText().toString());
+                        dbHelper.insert(DatabaseInfo.BarometerTables.USER, null, values);
+                        requestSubjects();
+                    } else if(!isNetworkAvailable()){
+                        showNoInternetMessage();
+                    }
 
                 }
             });
@@ -124,22 +133,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void startLoading() {
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
 
-        Runnable runnable = new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(15000);
-                    for (int i = 0; i <= 100; i++) {
-
+    public void showNoInternetMessage(){
+        String message = "Je beschikt op dit moment niet over een internetvebinding probeer het later opnieuw.";
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        //do things
                     }
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        };
-        new Thread(runnable).start();
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 }
 
