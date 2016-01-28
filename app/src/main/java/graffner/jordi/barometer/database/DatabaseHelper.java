@@ -18,6 +18,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
 
+
     public DatabaseHelper(Context ctx) {
         super(ctx, dbName, null, dbVersion);					// gebruik de super constructor.
     }
